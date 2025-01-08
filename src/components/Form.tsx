@@ -12,6 +12,7 @@ export default function Form() {
     const handleChange = (e) => {
         
         setActivity({
+            ...activity,
             [e.target.value]: e.target.value
         })
         console.log(e.target.id);

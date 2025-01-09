@@ -1,23 +1,46 @@
-import { useState } from "react"
+import { useState, ChangeEvent, FormEvent } from "react"
 import { categories } from "../data/categories"
+import { Activity } from "../types"
 
 export default function Form() {
 
-    const [activity, setActivity] = useState({
+    const [activity, setActivity] = useState<Activity>({
         category: 1,
         name: '',
         calories: 0
     })
 
-    const handleChange = (e) => {
+    const handleChange = ( e : ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement> ) => {
         
+        const isNumberField = ['category','calories'].includes(e.target.id);
+
         setActivity({
-            ...activity,
-            [e.target.value]: e.target.value
-        })
-        console.log(e.target.id);
-        console.log(e.target.value);
         
+            ...activity,
+
+            // Comprueba si es un campo numerico y lo parsea
+            [e.target.id]: isNumberField ? +e.target.value : e.target.value
+        
+        });
+
+        return true;
+        
+    }
+
+    // Verifica que se llenen todos los campos
+    const isValidActivity = () => {
+        
+        const { name, calories } = activity;
+        console.log( name.trim() !== '' && calories > 0 );
+        return name.trim() !== '' && calories > 0;
+    
+    }
+
+    // Guarda el formulario
+    const handleSubmit = ( e : FormEvent<HTMLElement> ) => {
+        e.preventDefault();
+        console.log('submit');
+        return true;
     }
 
     return(
@@ -28,6 +51,7 @@ export default function Form() {
                 p-10
                 rounded-lg
             "
+            onSubmit ={ handleSubmit }
         >
             {/* Categorias */}
             <div
@@ -57,7 +81,7 @@ export default function Form() {
                         >
                             {category.name}
                         </option>
-                    ) )}
+                    ))}
                 </select>
             </div>
 
@@ -92,15 +116,30 @@ export default function Form() {
                     type="number"
                     className="border border-slate-300 p-2 rounded-lg"
                     placeholder="Ej. 300 o 500"
+                    min={0}
                     value={activity.calories}
                     onChange={ handleChange }
+                    
+                    
                 />
             </div>
 
             <input 
                 type="submit" 
-                className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white" 
-                value='Guardar comida o Guardar Ejercicio'
+                className="
+                    bg-gray-800
+                    hover:bg-gray-900
+                    w-full p-2
+                    font-bold
+                    uppercase 
+                    text-white
+                    disabled:opacity-50 
+                    disabled:cursor-not-allowed
+                    cursor-pointer
+
+                " 
+                value={ activity.category === 1 ? ' Guardar Comida' : 'Guardar Ejercicio'}
+                disabled = { !isValidActivity() }
             />
 
         </form>

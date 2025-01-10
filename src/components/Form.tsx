@@ -1,8 +1,13 @@
-import { useState, ChangeEvent, FormEvent } from "react"
+import { useState, ChangeEvent, FormEvent, Dispatch } from "react"
 import { categories } from "../data/categories"
 import { Activity } from "../types"
+import { ActivityActions } from "../reducers/ActivityReducer"
 
-export default function Form() {
+type FormProps = {
+    dispatch : Dispatch<ActivityActions>
+}
+
+export default function Form({dispatch} : FormProps) {
 
     const [activity, setActivity] = useState<Activity>({
         category: 1,
@@ -22,8 +27,6 @@ export default function Form() {
             [e.target.id]: isNumberField ? +e.target.value : e.target.value
         
         });
-
-        return true;
         
     }
 
@@ -39,8 +42,9 @@ export default function Form() {
     // Guarda el formulario
     const handleSubmit = ( e : FormEvent<HTMLElement> ) => {
         e.preventDefault();
-        console.log('submit');
-        return true;
+        
+        dispatch({type: 'save activity' , payload : {newActivity: activity}})
+
     }
 
     return(
@@ -51,7 +55,7 @@ export default function Form() {
                 p-10
                 rounded-lg
             "
-            onSubmit ={ handleSubmit }
+            onSubmit = { handleSubmit }
         >
             {/* Categorias */}
             <div

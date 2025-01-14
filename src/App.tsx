@@ -1,5 +1,6 @@
-import Form from "./components/Form"
 import { useReducer } from "react"
+
+import Form from "./components/Form"
 import { activityReducer, initialState } from "./reducers/activityReducer"
 import ActivityList from "./components/ActivityList";
 
@@ -7,9 +8,6 @@ function App() {
 
 
   const [ state, dispatch ] = useReducer( activityReducer, initialState);
-
-  console.log(state);
-  
 
   return (
     <>
@@ -20,9 +18,10 @@ function App() {
             text-lg
             font-bold
             text-white
-            uppercase">
-              Contador de calorias
-            </h1>
+            uppercase"
+          >
+            Contador de calorias
+          </h1>
 
         </div>
       </header>
@@ -34,7 +33,8 @@ function App() {
       ">
         <div className="max-w-4xl mx-auto">
           <Form
-            dispatch = {dispatch}
+            dispatch = { dispatch }
+            state= { state }
           />
         </div>
       </section>
@@ -47,6 +47,7 @@ function App() {
         "
       >
         <ActivityList
+          dispatch = { dispatch }
           activities = { state.activities }
         />
       </section>

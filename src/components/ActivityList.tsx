@@ -1,5 +1,5 @@
 import { Dispatch, useMemo } from "react"
-import { PencilSquareIcon  } from "@heroicons/react/24/outline"
+import { PencilSquareIcon, XCircleIcon  } from "@heroicons/react/24/outline"
 
 import { Activity } from "../types"
 import { categories } from "../data/categories"
@@ -16,6 +16,8 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
     const categoryName = useMemo( () => (category : Activity['category']) => categories.map( ( cat ) => cat.id === category ? cat.name : '')
     , [activities])
     
+    const isEmptyActivities = useMemo( () => activities.length === 0, [activities] );
+
     return (
         <>
 
@@ -25,6 +27,9 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
             
             
             {
+                isEmptyActivities ? 
+                <p className="my-5 text-center">No hay actividades aún...</p> :
+
                 // Itera sobre cada actividad
                 activities.map( activity => (
                 
@@ -49,6 +54,13 @@ export default function ActivityList({activities, dispatch} : ActivityListProps)
                         >
                             <PencilSquareIcon className="h-8 w-8 text-gray-800">
                             </PencilSquareIcon>
+                        </button>
+                   
+                        <button
+                            onClick={ () => dispatch( {type: 'delete-activity', payload: {id: activity.id}} ) }
+                        >
+                            <XCircleIcon className="h-8 w-8 text-red-800">
+                            </XCircleIcon>
                         </button>
                     </div>
 

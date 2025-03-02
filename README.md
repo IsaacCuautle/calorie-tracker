@@ -8,6 +8,29 @@
 - **Estadísticas resumidas**: La aplicación muestra un resumen con el total de calorías consumidas, las calorías quemadas y la diferencia entre ambas.
 - **Lista de actividades registradas**: Se puede ver un historial de todas las actividades registradas, con opciones para editar o eliminar registros previos.
 
+## Imágenes del proyecto
+
+<div
+  class="imagenes"  
+  style="
+  display: flex;"
+>
+<img 
+  style="
+    width: 200px; 
+    heigth: 300px; "
+  src='https://github.com/user-attachments/assets/636895d2-acb9-42f3-acf4-921ccf9797ac'  
+/>
+<img 
+  style="
+    width: 400px; 
+    heigth: 100px; "
+  src='https://github.com/user-attachments/assets/8b967951-b4b0-47fd-b6b0-f25203a33e47'
+/>
+
+</div>
+
+
 ## Tecnologías utilizadas
 
 - **React**: Framework de JavaScript para construir interfaces de usuario interactivas.

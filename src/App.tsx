@@ -63,19 +63,14 @@ function App() {
       ">
         
         <div className="max-w-4xl mx-auto">
-          <Form
-            dispatch = { dispatch }
-            state= { state }
-          />
+          <Form />
         </div>
       
       </section>
 
       <section className="bg-gray-800 p-10">
         <div className="max-w-4xl mx-auto">
-          <CalorieTracker
-            activities = { state.activities }
-          />
+          <CalorieTracker />
         </div>
       </section>
 
@@ -86,10 +81,7 @@ function App() {
           max-w-4xl
         "
       >
-        <ActivityList
-          dispatch = { dispatch }
-          activities = { state.activities }
-        />
+        <ActivityList />
       </section>
     </>
   )

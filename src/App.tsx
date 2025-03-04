@@ -1,14 +1,14 @@
-import { useReducer, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import Form from "./components/Form";
 import CalorieTracker from "./components/CalorieTracker";
-import { activityReducer, initialState } from "./reducers/activityReducer";
 import ActivityList from "./components/ActivityList";
+import { useActivity } from "./hooks/useActivity";
+
 
 function App() {
 
-
-  const [ state, dispatch ] = useReducer( activityReducer, initialState);
+  const { state, dispatch } = useActivity()
   
   useEffect( () => {
     
@@ -63,19 +63,14 @@ function App() {
       ">
         
         <div className="max-w-4xl mx-auto">
-          <Form
-            dispatch = { dispatch }
-            state= { state }
-          />
+          <Form />
         </div>
       
       </section>
 
       <section className="bg-gray-800 p-10">
         <div className="max-w-4xl mx-auto">
-          <CalorieTracker
-            activities = { state.activities }
-          />
+          <CalorieTracker />
         </div>
       </section>
 
@@ -86,10 +81,7 @@ function App() {
           max-w-4xl
         "
       >
-        <ActivityList
-          dispatch = { dispatch }
-          activities = { state.activities }
-        />
+        <ActivityList />
       </section>
     </>
   )
